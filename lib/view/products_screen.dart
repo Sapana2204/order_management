@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_new_project/view/productDetails_screen.dart';
 import '../utils/routes/app_colors.dart';
 
 class ProductsScreen extends StatefulWidget {
@@ -216,209 +217,273 @@ class _ProductsScreenState extends State<ProductsScreen> {
     required String unit,
     required bool inStock,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: cardColor,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: borderColor),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.03),
-            blurRadius: 6,
-            offset: const Offset(0, 3),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductDetailsScreen(
+              image: image,
+              code: code,
+              title: title,
+              price: price,
+              unit: unit,
+              inStock: inStock,
+            ),
           ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        );
+      },
 
-          /// IMAGE
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(12),
-                  topRight: Radius.circular(12),
-                ),
-                child: Image.network(
-                  image,
-                  height: 190,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: cardColor,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: borderColor),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.03),
+              blurRadius: 6,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
 
-              Positioned(
-                top: 12,
-                right: 12,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
+        child: Column(
+          crossAxisAlignment:
+          CrossAxisAlignment.start,
+          children: [
+
+            /// IMAGE
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius:
+                  const BorderRadius.only(
+                    topLeft: Radius.circular(12),
+                    topRight: Radius.circular(12),
                   ),
-                  decoration: BoxDecoration(
-                    color: inStock
-                        ? const Color(0xff7FE1E0)
-                        : const Color(0xffE7C0C0),
-                    borderRadius: BorderRadius.circular(20),
+
+                  child: Image.network(
+                    image,
+                    height: 190,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
                   ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.check_circle,
-                        size: 14,
-                        color: inStock
-                            ? primary
-                            : Colors.red.shade700,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        inStock
-                            ? "In Stock"
-                            : "Out of Stock",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
+                ),
+
+                Positioned(
+                  top: 12,
+                  right: 12,
+
+                  child: Container(
+                    padding:
+                    const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+
+                    decoration: BoxDecoration(
+                      color: inStock
+                          ? const Color(0xff7FE1E0)
+                          : const Color(0xffE7C0C0),
+
+                      borderRadius:
+                      BorderRadius.circular(20),
+                    ),
+
+                    child: Row(
+                      children: [
+
+                        Icon(
+                          Icons.check_circle,
+                          size: 14,
+
                           color: inStock
                               ? primary
                               : Colors.red.shade700,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
 
-          Padding(
-            padding: const EdgeInsets.all(14),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+                        const SizedBox(width: 4),
 
-                /// PRODUCT CODE
-                Text(
-                  code,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1,
-                    color: textSecondary,
-                  ),
-                ),
+                        Text(
+                          inStock
+                              ? "In Stock"
+                              : "Out of Stock",
 
-                const SizedBox(height: 6),
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight:
+                            FontWeight.w600,
 
-                /// TITLE
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: textPrimary,
-                  ),
-                ),
-
-                const SizedBox(height: 14),
-
-                Divider(color: dividerColor),
-
-                const SizedBox(height: 10),
-
-                /// PRICE & UNIT
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment:
-                        CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "RATE",
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 1,
-                              color: textSecondary,
-                            ),
+                            color: inStock
+                                ? primary
+                                : Colors.red.shade700,
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            price,
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              color: textPrimary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment:
-                        CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "UNIT",
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 1,
-                              color: textSecondary,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            unit,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: textPrimary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 18),
-
-                /// BUTTON
-                Container(
-                  height: 52,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: secondary,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: const Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.shopping_cart_outlined,
-                        color: Colors.white,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        "Add to Cart",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
                         ),
-                      )
-                    ],
+                      ],
+                    ),
                   ),
                 )
               ],
             ),
-          )
-        ],
+
+            Padding(
+              padding: const EdgeInsets.all(14),
+
+              child: Column(
+                crossAxisAlignment:
+                CrossAxisAlignment.start,
+
+                children: [
+
+                  /// PRODUCT CODE
+                  Text(
+                    code,
+
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1,
+                      color: textSecondary,
+                    ),
+                  ),
+
+                  const SizedBox(height: 6),
+
+                  /// TITLE
+                  Text(
+                    title,
+
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: textPrimary,
+                    ),
+                  ),
+
+                  const SizedBox(height: 14),
+
+                  Divider(color: dividerColor),
+
+                  const SizedBox(height: 10),
+
+                  /// PRICE & UNIT
+                  Row(
+                    children: [
+
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+
+                          children: [
+
+                            Text(
+                              "RATE",
+
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight:
+                                FontWeight.w700,
+                                letterSpacing: 1,
+                                color: textSecondary,
+                              ),
+                            ),
+
+                            const SizedBox(height: 4),
+
+                            Text(
+                              price,
+
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight:
+                                FontWeight.bold,
+                                color: textPrimary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+
+                          children: [
+
+                            Text(
+                              "UNIT",
+
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight:
+                                FontWeight.w700,
+                                letterSpacing: 1,
+                                color: textSecondary,
+                              ),
+                            ),
+
+                            const SizedBox(height: 4),
+
+                            Text(
+                              unit,
+
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: textPrimary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 18),
+
+                  /// BUTTON
+                  Container(
+                    height: 52,
+                    width: double.infinity,
+
+                    decoration: BoxDecoration(
+                      color: secondary,
+                      borderRadius:
+                      BorderRadius.circular(6),
+                    ),
+
+                    child: const Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.center,
+
+                      children: [
+
+                        Icon(
+                          Icons.shopping_cart_outlined,
+                          color: Colors.white,
+                        ),
+
+                        SizedBox(width: 10),
+
+                        Text(
+                          "Add to Cart",
+
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

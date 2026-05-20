@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/routes/app_colors.dart';
+import 'orderPlaced_screen.dart';
 
 class OrderReviewScreen extends StatefulWidget {
   const OrderReviewScreen({super.key});
@@ -431,7 +432,14 @@ class _OrderReviewScreenState
             width: double.infinity,
             height: 52,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const OrderPlacedScreen(),
+                  ),
+                );
+              },
               style:
               ElevatedButton.styleFrom(
                 backgroundColor: secondary,

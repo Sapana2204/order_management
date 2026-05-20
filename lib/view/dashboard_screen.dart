@@ -597,33 +597,33 @@ class DashboardScreen extends StatelessWidget {
 
           const SizedBox(height: 14),
 
-          Container(
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: Colors.white24,
-              ),
-            ),
-            child: const Row(
-              mainAxisAlignment:
-              MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.description_outlined,
-                  color: Colors.white,
-                ),
-                SizedBox(width: 8),
-                Text(
-                  "PRICE CATALOGUE",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-              ],
-            ),
-          )
+          // Container(
+          //   height: 50,
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(8),
+          //     border: Border.all(
+          //       color: Colors.white24,
+          //     ),
+          //   ),
+          //   child: const Row(
+          //     mainAxisAlignment:
+          //     MainAxisAlignment.center,
+          //     children: [
+          //       Icon(
+          //         Icons.description_outlined,
+          //         color: Colors.white,
+          //       ),
+          //       SizedBox(width: 8),
+          //       Text(
+          //         "PRICE CATALOGUE",
+          //         style: TextStyle(
+          //           color: Colors.white,
+          //           fontWeight: FontWeight.bold,
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          // )
         ],
       ),
     );

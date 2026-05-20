@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_new_project/view/profile_screen.dart';
 
 import '../utils/routes/app_colors.dart';
+import 'orderHistory_screen.dart';
 import 'orderReview_screen.dart';
 import 'dashboard_screen.dart';
 import 'products_screen.dart';
@@ -17,11 +19,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late int _currentIndex;
 
-  final List<Widget> _pages = const [
-    DashboardScreen(), // HOME
-    ProductsScreen(), // PRODUCTS
-    Center(child: Text("Orders Screen")), // ORDERS
-    Center(child: Text("Profile Screen")), // PROFILE
+  final List<Widget> _pages = [
+    const DashboardScreen(), // HOME
+    const ProductsScreen(), // PRODUCTS
+    const OrderHistoryScreen(), // ORDERS
+    const ProfileScreen(), // PROFILE
   ];
 
   @override
@@ -165,57 +167,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: Icon(Icons.person_outline),
                 activeIcon: Icon(Icons.person),
                 label: "Profile",
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  // ==============================
-  // NAV ITEM
-  // ==============================
-  Widget _modernNavItem(
-      IconData icon,
-      String label,
-      int index,
-      ) {
-    final isSelected = _currentIndex == index;
-
-    return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          setState(() => _currentIndex = index);
-        },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
-          padding: const EdgeInsets.symmetric(vertical: 6),
-          decoration: BoxDecoration(
-            color: isSelected
-                ? primary.withOpacity(0.12)
-                : Colors.transparent,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                icon,
-                color: isSelected ? primary : Colors.grey,
-                size: 22,
-              ),
-
-              const SizedBox(height: 3),
-
-              Text(
-                label,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 11,
-                  color: isSelected ? primary : Colors.grey,
-                  fontWeight: FontWeight.w600,
-                ),
               ),
             ],
           ),
