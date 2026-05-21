@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_new_project/view/products_screen.dart';
 import '../utils/routes/app_colors.dart';
+import 'homeScreen.dart';
 import 'orderPlaced_screen.dart';
 
 class OrderReviewScreen extends StatefulWidget {
@@ -89,6 +91,7 @@ class _OrderReviewScreenState
         children: [
 
           /// HEADER
+          /// HEADER
           Row(
             mainAxisAlignment:
             MainAxisAlignment.spaceBetween,
@@ -103,25 +106,69 @@ class _OrderReviewScreenState
                 ),
               ),
 
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  color: primary.withOpacity(0.08),
-                  borderRadius:
-                  BorderRadius.circular(20),
-                ),
-                child: Text(
-                  "${items.length} ITEMS",
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                    color: primary,
-                    letterSpacing: 0.8,
+              Row(
+                children: [
+
+                  /// ADD PRODUCT
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(
+                            initialIndex: 1,
+                          ),
+                        ),
+                      );
+                    },
+
+                    child: Row(
+                      children: [
+
+                        Icon(
+                          Icons.add_circle_outline,
+                          size: 20,
+                          color: primary,
+                        ),
+
+                        const SizedBox(width: 4),
+
+                        Text(
+                          "Add",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: primary,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+
+                  const SizedBox(width: 14),
+
+                  /// ITEMS COUNT
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: primary.withOpacity(0.08),
+                      borderRadius:
+                      BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      "${items.length} ITEMS",
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: primary,
+                        letterSpacing: 0.8,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

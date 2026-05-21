@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_new_project/view/productDetails_screen.dart';
+import 'package:my_new_project/view/products_screen.dart';
+import 'package:path/path.dart';
 import '../utils/routes/app_colors.dart';
+import 'homeScreen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -45,8 +49,13 @@ class DashboardScreen extends StatelessWidget {
 
             const SizedBox(height: 18),
 
+            /// NEW PRODUCTS
+            _newArrivalsSection(context),
+
+            const SizedBox(height: 18),
+
             /// RECENT ORDERS
-            _recentOrdersTable(),
+            _recentOrdersTable(context),
 
             const SizedBox(height: 18),
 
@@ -56,7 +65,7 @@ class DashboardScreen extends StatelessWidget {
             const SizedBox(height: 18),
 
             /// PORTFOLIO CARD
-            _portfolioCard(),
+            _portfolioCard(context),
 
             const SizedBox(height: 20),
           ],
@@ -212,9 +221,243 @@ class DashboardScreen extends StatelessWidget {
   }
 
   /// =======================
+  /// NEW ARRIVALS SECTION
+  /// =======================
+  Widget _newArrivalsSection(BuildContext context) {
+    final products = [
+      {
+        "name": "Nitro Growth Booster",
+        "price": "\$120",
+        "icon": Icons.eco_outlined,
+        "color": Colors.green,
+        "image":
+        "https://images.unsplash.com/photo-1589923188900-85dae523342b",
+        "code": "NG-1024",
+        "unit": "Per Bag",
+        "stock": true,
+      },
+      {
+        "name": "Organic Crop Mix",
+        "price": "\$85",
+        "icon": Icons.spa_outlined,
+        "color": Colors.orange,
+        "image":
+        "https://images.unsplash.com/photo-1464226184884-fa280b87c399",
+        "code": "OC-7841",
+        "unit": "25 KG",
+        "stock": true,
+      },
+      {
+        "name": "Premium Soil Pack",
+        "price": "\$240",
+        "icon": Icons.grass_outlined,
+        "color": Colors.blue,
+        "image":
+        "https://images.unsplash.com/photo-1501004318641-b39e6451bec6",
+        "code": "PS-4490",
+        "unit": "50 KG",
+        "stock": false,
+      },
+    ];
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: cardColor,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: borderColor),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+
+          /// TITLE
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Newly Arrived Products",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: textPrimary,
+                ),
+              ),
+
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomeScreen(
+                        initialIndex: 1,
+                      ),
+                    ),
+                  );
+                },
+
+                child: Text(
+                  "View All",
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: primary,
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 18),
+
+          /// HORIZONTAL PRODUCTS
+          SizedBox(
+            height: 230,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: products.length,
+              separatorBuilder: (_, __) =>
+              const SizedBox(width: 14),
+              itemBuilder: (context, index) {
+                final product = products[index];
+
+                return _productCard(
+                  context,
+                  product["name"] as String,
+                  product["price"] as String,
+                  product["icon"] as IconData,
+                  product["color"] as Color,
+                  product["image"] as String,
+                  product["code"] as String,
+                  product["unit"] as String,
+                  product["stock"] as bool,
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// =======================
+  /// PRODUCT CARD
+  /// =======================
+  Widget _productCard(
+      BuildContext context,
+      String name,
+      String price,
+      IconData icon,
+      Color iconColor,
+      String image,
+      String code,
+      String unit,
+      bool inStock,
+      ) {
+    return Container(
+      width: 160,
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: borderColor),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+
+          /// ICON
+          Container(
+            height: 58,
+            width: 58,
+            decoration: BoxDecoration(
+              color: iconColor.withOpacity(0.12),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Icon(
+              icon,
+              color: iconColor,
+              size: 30,
+            ),
+          ),
+
+          const SizedBox(height: 18),
+
+          /// NAME
+          Text(
+            name,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: textPrimary,
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
+          /// PRICE
+          Text(
+            price,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: primary,
+            ),
+          ),
+
+          const Spacer(),
+
+          /// BUTTON
+          SizedBox(
+            width: double.infinity,
+            height: 40,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: primary,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProductDetailsScreen(
+                      image: image,
+                      code: code,
+                      title: name,
+                      price: price,
+                      unit: unit,
+                      inStock: inStock,
+                    ),
+                  ),
+                );
+              },
+
+              child: const Text(
+                "View Product",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// =======================
   /// RECENT ORDERS TABLE
   /// =======================
-  Widget _recentOrdersTable() {
+  Widget _recentOrdersTable(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: cardColor,
@@ -257,11 +500,25 @@ class DashboardScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     border: Border.all(color: accentBlue),
                   ),
-                  child: const Text(
-                    "View All",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
+                  child:     GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(
+                            initialIndex: 1,
+                          ),
+                        ),
+                      );
+                    },
+
+                    child: const Text(
+                      "View All",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 )
@@ -529,7 +786,7 @@ class DashboardScreen extends StatelessWidget {
   /// =======================
   /// PORTFOLIO CARD
   /// =======================
-  Widget _portfolioCard() {
+  Widget _portfolioCard(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(18),
@@ -565,30 +822,46 @@ class DashboardScreen extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: accentBlue,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.shopping_cart_outlined,
-                        color: Colors.white,
-                      ),
-                      SizedBox(width: 8),
-
-                      Text(
-                        "PLACE NEW ORDER",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeScreen(
+                          initialIndex: 1,
                         ),
-                      )
-                    ],
+                      ),
+                    );
+                  },
+
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: accentBlue,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+
+                    child: const Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.center,
+                      children: [
+
+                        Icon(
+                          Icons.shopping_cart_outlined,
+                          color: Colors.white,
+                        ),
+
+                        SizedBox(width: 8),
+
+                        Text(
+                          "PLACE NEW ORDER",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
