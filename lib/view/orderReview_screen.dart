@@ -112,14 +112,14 @@ class _OrderReviewScreenState
                   /// ADD PRODUCT
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomeScreen(
-                            initialIndex: 1,
-                          ),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                        // MaterialPageRoute(
+                        //   builder: (context) => const HomeScreen(
+                        //     initialIndex: 1,
+                        //   ),
+                        // ),
+                      // );
                     },
 
                     child: Row(

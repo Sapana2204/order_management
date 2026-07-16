@@ -1,84 +1,94 @@
 import 'package:flutter/material.dart';
 
 /// ===============================
-/// 🎨 APP COLOR PALETTE
-/// Based on Login Screen UI
+/// 🎨 BRAND COLORS
 /// ===============================
 
-/// 🔵 Brand Colors
-Color primary = const Color(0xFF001B3A); // Main dark navy
-Color darkPrimary = const Color(0xFF00122A);
-Color lightPrimary = const Color(0xFF2A6FD6);
-Color secondary = const Color(0xFF006D77); // teal accent
-Color accentBlue = const Color(0xFF3D8BFF);
+Color primary = const Color(0xFF1398DF);
+Color lightPrimary = const Color(0xFF1398E1);
+Color darkPrimary = const Color(0xFF0D539A);
 
-/// ⚪ Background Colors
-Color backgroundColor = const Color(0xFFEDEDED); // app bg
-Color cardColor = const Color(0xFFF7F7F7); // container bg
+Color secondary = const Color(0xFF4FC3F7);
+Color accent = const Color(0xFF82D9FF);
+
+/// ===============================
+/// ⚪ BACKGROUND COLORS
+/// ===============================
+
+Color backgroundColor = const Color(0xFFF7FAFD);
+Color scaffoldBackground = Colors.white;
+Color cardColor = Colors.white;
 Color white = Colors.white;
 
-/// ⚫ Text Colors
-Color textPrimary = const Color(0xFF111111);
-Color textSecondary = Colors.black54;
-Color textLight = Colors.black45;
+/// ===============================
+/// 📝 TEXT COLORS
+/// ===============================
 
-/// ⚙️ Border & Divider Colors
-Color borderColor = const Color(0xFFD6D6D6);
-Color dividerColor = const Color(0xFFE0E0E0);
+Color textPrimary = const Color(0xFF1A1A1A);
+Color textSecondary = const Color(0xFF666666);
+Color textLight = const Color(0xFF999999);
 
-/// 🌑 Neutral Colors
+/// ===============================
+/// 🔲 BORDER COLORS
+/// ===============================
+
+Color borderColor = const Color(0xFFE2E8F0);
+Color dividerColor = const Color(0xFFF1F5F9);
+
+/// ===============================
+/// ⚫ NEUTRAL COLORS
+/// ===============================
+
 Color black = Colors.black;
 Color grey = const Color(0xFF8E8E8E);
-Color lightGrey = const Color(0xFFF1F1F1);
+Color lightGrey = const Color(0xFFF5F5F5);
 
 /// ===============================
 /// 🌈 GRADIENTS
 /// ===============================
 
-/// 🔵 Primary App Gradient
 LinearGradient primaryGradient = const LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
   colors: [
-    Color(0xFF001B3A),
-    Color(0xFF2A6FD6),
+    Color(0xFF1398DF),
+    Color(0xFF0D539A),
   ],
 );
 
-/// 🌊 Soft Background Gradient
-LinearGradient softGradient = const LinearGradient(
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-  colors: [
-    Color(0xFFF7F7F7),
-    Color(0xFFEDEDED),
-  ],
-);
-
-/// 🔘 Button Gradient
 LinearGradient buttonGradient = const LinearGradient(
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,
   colors: [
-    Color(0xFF001B3A),
-    Color(0xFF2A6FD6),
+    Color(0xFF1398E1),
+    Color(0xFF0D539A),
+  ],
+);
+
+LinearGradient softGradient = const LinearGradient(
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+  colors: [
+    Color(0xFFFFFFFF),
+    Color(0xFFF7FAFD),
   ],
 );
 
 /// ===============================
-/// 🎯 UI SPECIFIC COLORS
+/// 🎯 UI COLORS
 /// ===============================
 
 Color buttonColor = primary;
 Color buttonTextColor = white;
 
-Color inputFillColor = white;
+Color inputFillColor = Colors.white;
 Color inputBorderColor = borderColor;
 Color focusedBorderColor = primary;
 
-Color selectedRoleColor = primary;
-Color unselectedRoleColor = const Color(0xFFE5E5E5);
+Color selectedColor = primary;
+Color unselectedColor = const Color(0xFFF1F5F9);
 
-Color successColor = const Color(0xFF1E8E3E);
-Color errorColor = const Color(0xFFD93025);
-Color warningColor = const Color(0xFFF9AB00);
+/// Status Colors
+Color successColor = const Color(0xFF16A34A);
+Color errorColor = const Color(0xFFDC2626);
+Color warningColor = const Color(0xFFF59E0B);

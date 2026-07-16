@@ -10,9 +10,12 @@ class Routes {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
     switch (settings.name) {
 
+
       case (RouteNames.home):
         return MaterialPageRoute(
-            builder: (BuildContext context) => const HomeScreen());
+          builder: (BuildContext context) => const HomeScreen(
+            role: "salesman",          ),
+        );
 
       case (RouteNames.login):
         return MaterialPageRoute(

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_new_project/utils/routes/app_colors.dart';
+import 'package:my_new_project/view/orderHistory_screen.dart';
+
+import 'homeScreen.dart';
 
 class OrderPlacedScreen extends StatelessWidget {
   const OrderPlacedScreen({super.key});
@@ -280,7 +283,13 @@ class OrderPlacedScreen extends StatelessWidget {
 
                       child: ElevatedButton(
                         onPressed: () {
-
+                          // Navigator.pushAndRemoveUntil(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const HomeScreen(),
+                          //   ),
+                          //       (route) => false,
+                          // );
                         },
 
                         style:
@@ -322,8 +331,17 @@ class OrderPlacedScreen extends StatelessWidget {
 
                       child: OutlinedButton(
                         onPressed: () {
-
+                          // Navigator.pushAndRemoveUntil(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const HomeScreen(
+                          //       initialIndex: 2,
+                          //     ),
+                          //   ),
+                          //       (route) => false,
+                          // );
                         },
+
 
                         style:
                         OutlinedButton.styleFrom(
