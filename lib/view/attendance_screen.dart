@@ -9,7 +9,22 @@ class AttendanceScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor,
 
-
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
+          color: Colors.black,
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text(
+          "Attendance",
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
 
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

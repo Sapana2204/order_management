@@ -1,121 +1,152 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:my_new_project/utils/routes/app_colors.dart';
-
-import 'loginScreen.dart';
+import '../utils/routes/app_colors.dart';
+import 'attendance_screen.dart';
+import 'notifications_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    String userName = "Alexander Wright";
+    String empId = "SM-92841";
+
     return Scaffold(
       backgroundColor: backgroundColor,
+
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: const Text(
+          "Profile",
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
+          color: Colors.black,
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+
       body: SingleChildScrollView(
         child: Column(
           children: [
 
-            /// TOP HEADER
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.only(
-                left: 20,
-                right: 20,
-                top: 10,
-                bottom: 28,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 25,
               ),
-
-              decoration: BoxDecoration(
-                color: primary,
-
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(28),
-                  bottomRight: Radius.circular(28),
-                ),
+              decoration: const BoxDecoration(
+                color: Colors.white,
               ),
-
               child: Column(
                 children: [
 
-                  /// PROFILE IMAGE
                   Stack(
+                    clipBehavior: Clip.none,
                     children: [
 
+                      /// Profile Avatar
                       Container(
-                        height: 110,
                         width: 110,
-
+                        height: 110,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 4,
-                          ),
-
-                          image: const DecorationImage(
-                            image: NetworkImage(
-                              "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=500",
+                          gradient: primaryGradient,
+                          boxShadow: [
+                            BoxShadow(
+                              color: primary.withOpacity(.30),
+                              blurRadius: 15,
+                            )
+                          ],
+                        ),
+                        child: Center(
+                          child: Text(
+                            userName[0],
+                            style: const TextStyle(
+                              fontSize: 42,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
-                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
 
+                      Positioned(
+                        right: 0,
+                        bottom: 5,
+                        child: Container(
+                          width: 34,
+                          height: 34,
+                          decoration: BoxDecoration(
+                            color: primary,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 2,
+                            ),
+                          ),
+                          child: const Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                        ),
+                      )
                     ],
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  /// NAME
-                  const Text(
-                    "John Doe",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-
-                  const SizedBox(height: 6),
-
-                  const Text(
-                    "Regional Procurement Manager",
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 14,
-                    ),
                   ),
 
                   const SizedBox(height: 18),
 
-                  /// STATS
-                  Row(
-                    children: [
+                  Text(
+                    userName,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
 
-                      Expanded(
-                        child: buildStatCard(
-                          "128",
-                          "Orders",
+                  const SizedBox(height: 5),
+
+                  Text(
+                    "EMP ID : $empId",
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+
+                  const SizedBox(height: 22),
+
+                  SizedBox(
+                    width: 170,
+                    height: 48,
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                          BorderRadius.circular(30),
+                        ),
+                        side: BorderSide(
+                          color: borderColor,
                         ),
                       ),
-
-                      const SizedBox(width: 12),
-
-                      Expanded(
-                        child: buildStatCard(
-                          "\$85K",
-                          "Spent",
+                      child: Text(
+                        "Edit Profile",
+                        style: TextStyle(
+                          color: textPrimary,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-
-                      const SizedBox(width: 12),
-
-                      Expanded(
-                        child: buildStatCard(
-                          "12",
-                          "Pending",
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
@@ -123,372 +154,332 @@ class ProfileScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            Padding(
-              padding:
-              const EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
+            /// PART 2
+            quickReportPlaceholder(),
 
-              child: Column(
+            const SizedBox(height: 20),
+
+            /// PART 3
+            settingsPlaceholder(context),          ],
+        ),
+      ),
+    );
+  }
+
+  Widget quickReportPlaceholder() {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(22),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(.05),
+                blurRadius: 10,
+              )
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
-
-                  /// PERSONAL INFO
-                  buildSectionTitle(
-                      "Personal Information"),
-
-                  const SizedBox(height: 14),
-
-                  buildInfoCard(
-                    icon: Icons.person_outline,
-                    title: "Full Name",
-                    value: "John Doe",
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  buildInfoCard(
-                    icon: Icons.email_outlined,
-                    title: "Email Address",
-                    value:
-                    "johndoe@company.com",
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  buildInfoCard(
-                    icon: Icons.phone_outlined,
-                    title: "Phone Number",
-                    value: "+91 98765 43210",
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  buildInfoCard(
-                    icon: Icons.location_on_outlined,
-                    title: "Office Location",
-                    value: "Sangamner, Maharashtra",
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  /// LOGOUT BUTTON
-                  SizedBox(
-                    width: double.infinity,
-                    height: 54,
-
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-
-                              title: Text(
-                                "Logout",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: primary,
-                                ),
-                              ),
-
-                              content: const Text(
-                                "Do you want to logout?",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-
-                              actions: [
-
-                                /// CANCEL
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-
-                                  child: const Text(
-                                    "Cancel",
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-
-                                /// LOGOUT
-                                ElevatedButton(
-                                  onPressed: () {
-
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                        const LoginScreen(),
-                                      ),
-                                          (route) => false,
-                                    );
-                                  },
-
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: primary,
-                                    elevation: 0,
-
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(10),
-                                    ),
-                                  ),
-
-                                  child: const Text(
-                                    "Logout",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      style:
-                      ElevatedButton.styleFrom(
-                        elevation: 0,
-                        backgroundColor:
-                        Colors.red.shade500,
-
-                        shape:
-                        RoundedRectangleBorder(
-                          borderRadius:
-                          BorderRadius
-                              .circular(14),
-                        ),
-                      ),
-
-                      icon: const Icon(
-                        Icons.logout,
-                        color: Colors.white,
-                      ),
-
-                      label: const Text(
-                        "Logout",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight:
-                          FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-
-                  /// 🔻 SYSTEM VERSION (NOW BELOW BUTTON)
                   const Text(
-                    "System Version 1.0.0 - AR  © 2026\n AR Infotech Order Management",
-                    textAlign: TextAlign.center,
+                    "Quick Reports (Weekly)",
                     style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey,
-                      height: 1.5, // 👈 better line spacing
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const Spacer(),
+                  Text(
+                    "Last 7 Days",
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
+                    ),
+                  )
                 ],
               ),
+
+              const SizedBox(height: 20),
+
+              SizedBox(
+                height: 220,
+                child: BarChart(
+                  BarChartData(
+                    maxY: 30,
+                    borderData: FlBorderData(show: false),
+
+                    gridData: FlGridData(
+                      horizontalInterval: 5,
+                      drawVerticalLine: false,
+                    ),
+
+                    titlesData: FlTitlesData(
+                      topTitles: const AxisTitles(
+                          sideTitles: SideTitles(showTitles: false)),
+                      rightTitles: const AxisTitles(
+                          sideTitles: SideTitles(showTitles: false)),
+
+                      leftTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          reservedSize: 28,
+                        ),
+                      ),
+
+                      bottomTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          getTitlesWidget: (value, meta) {
+                            const days = [
+                              "Mon",
+                              "Tue",
+                              "Wed",
+                              "Thu",
+                              "Fri",
+                              "Sat",
+                              "Sun"
+                            ];
+
+                            return Text(
+                              days[value.toInt()],
+                              style: const TextStyle(fontSize: 11),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+
+                    barGroups: [
+                      makeGroup(0, 12, 8),
+                      makeGroup(1, 18, 10),
+                      makeGroup(2, 15, 12),
+                      makeGroup(3, 24, 14),
+                      makeGroup(4, 21, 11),
+                      makeGroup(5, 9, 6),
+                      makeGroup(6, 6, 2),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 20),
+
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          width: double.infinity,
+          height: 58,
+          child: ElevatedButton.icon(
+            onPressed: () {},
+
+            icon: const Icon(
+              Icons.picture_as_pdf,
+              color: Colors.white,
             ),
-          ],
+
+            label: const Text(
+              "Export Performance Report (PDF)",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+
+            style: ElevatedButton.styleFrom(
+              backgroundColor: darkPrimary,
+              elevation: 3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18),
+              ),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 
-  /// SECTION TITLE
-  static Widget buildSectionTitle(String title) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: Color(0xff001B44),
-        ),
-      ),
-    );
-  }
-
-  /// STAT CARD
-  static Widget buildStatCard(
-      String value,
-      String label,
+  BarChartGroupData makeGroup(
+      int x,
+      double completed,
+      double pending,
       ) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 14,
-      ),
+    return BarChartGroupData(
+      x: x,
+      barsSpace: 4,
+      barRods: [
 
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.12),
-
-        borderRadius: BorderRadius.circular(16),
-
-        border: Border.all(
-          color: Colors.white24,
+        BarChartRodData(
+          toY: completed,
+          width: 9,
+          borderRadius: BorderRadius.circular(3),
+          color: primary,
         ),
-      ),
 
+        BarChartRodData(
+          toY: pending,
+          width: 9,
+          borderRadius: BorderRadius.circular(3),
+          color: Colors.green,
+        ),
+      ],
+    );
+  }
+
+  Widget settingsPlaceholder(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(22),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(.05),
+            blurRadius: 10,
+          ),
+        ],
+      ),
       child: Column(
         children: [
 
-          Text(
-            value,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+          settingsTile(
+            icon: Icons.lock_outline_rounded,
+            title: "Change Password",
+            onTap: () {},
           ),
 
-          const SizedBox(height: 4),
-
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white70,
-              fontSize: 12,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// INFO CARD
-  static Widget buildInfoCard({
-    required IconData icon,
-    required String title,
-    required String value,
-  }) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-
-        border: Border.all(
-          color: Colors.grey.shade300,
-        ),
-      ),
-
-      child: Row(
-        children: [
-
-          Container(
-            padding: const EdgeInsets.all(12),
-
-            decoration: BoxDecoration(
-              color: const Color(0xffEAF2FF),
-              borderRadius:
-              BorderRadius.circular(12),
-            ),
-
-            child: Icon(
-              icon,
-              color: const Color(0xff001B44),
-              size: 22,
-            ),
+          settingsTile(
+            icon: Icons.notifications_none_rounded,
+            title: "Notifications",
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const NotificationsScreen(),
+                ),
+              );
+            },
           ),
 
-          const SizedBox(width: 14),
+          settingsTile(
+            icon: Icons.history_rounded,
+            title: "Attendance History",
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const AttendanceScreen(),
+                ),
+              );
+            },
+          ),
 
-          Expanded(
-            child: Column(
-              crossAxisAlignment:
-              CrossAxisAlignment.start,
+          const Divider(height: 30),
 
-              children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: SizedBox(
+              width: double.infinity,
+              height: 55,
+              child: ElevatedButton.icon(
+                onPressed: () {},
 
-                Text(
-                  title,
+                icon: const Icon(
+                  Icons.logout_rounded,
+                  color: Colors.white,
+                ),
+
+                label: const Text(
+                  "Logout",
                   style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey.shade600,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
 
-                const SizedBox(height: 4),
-
-                Text(
-                  value,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff001B44),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red.shade500,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-              ],
+              ),
             ),
           ),
+
+          const SizedBox(height: 10),
+
+          Text(
+            "Version 1.0.0",
+            style: TextStyle(
+              color: Colors.grey.shade500,
+            ),
+          ),
+
+          const SizedBox(height: 10),
         ],
       ),
     );
   }
 
-  /// MENU TILE
-  static Widget buildMenuTile({
+  Widget settingsTile({
     required IconData icon,
     required String title,
+    Widget? trailing,
+    VoidCallback? onTap,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-
-        border: Border.all(
-          color: Colors.grey.shade300,
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(18),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 16,
         ),
-      ),
+        child: Row(
+          children: [
 
-      child: ListTile(
-        leading: Container(
-          padding: const EdgeInsets.all(10),
+            Container(
+              height: 42,
+              width: 42,
+              decoration: BoxDecoration(
+                color: primary.withOpacity(.08),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                icon,
+                color: primary,
+              ),
+            ),
 
-          decoration: BoxDecoration(
-            color: const Color(0xffEAF2FF),
-            borderRadius:
-            BorderRadius.circular(10),
-          ),
+            const SizedBox(width: 15),
 
-          child: Icon(
-            icon,
-            color: const Color(0xff001B44),
-          ),
+            Expanded(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+
+            trailing ??
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
+                  color: Colors.grey.shade400,
+                ),
+          ],
         ),
-
-        title: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-            color: Color(0xff001B44),
-          ),
-        ),
-
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          size: 16,
-          color: Colors.grey,
-        ),
-
-        onTap: () {},
       ),
     );
   }

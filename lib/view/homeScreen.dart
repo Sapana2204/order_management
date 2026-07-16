@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_new_project/view/profile_screen.dart';
 import 'package:my_new_project/view/salesman_dashboard_screen.dart';
 import '../utils/routes/app_colors.dart';
 import 'attendance_screen.dart';
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SalesmanDashboardScreen(),
     Placeholder(),
     Placeholder(),
-    AttendanceScreen(),
+    ProfileScreen(),
   ];
 
   List<Widget> get dealerPages => const [
@@ -62,14 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           InkWell(
             borderRadius: BorderRadius.circular(30),
-            onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (_) => const ProfileScreen(),
-              //   ),
-              // );
-            },
             child: Container(
               width: 48,
               height: 48,
@@ -204,14 +197,14 @@ class _HomeScreenState extends State<HomeScreen> {
               Icons.dashboard_outlined,
               Icons.people_alt_rounded,
               Icons.shopping_bag_rounded,
-              Icons.fact_check_rounded,
+              Icons.person_rounded,
             ];
 
             final labels = [
               "Dashboard",
               "Customers",
               "Orders",
-              "Attendance",
+              "Profile",
             ];
 
             return InkWell(
