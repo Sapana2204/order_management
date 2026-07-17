@@ -1,11 +1,14 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import '../utils/routes/app_colors.dart';
+import '../utils/routes/routes_names.dart';
 import 'attendance_screen.dart';
 import 'notifications_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class ProfileScreen extends StatelessWidget {  final VoidCallback onBack;
+
+const ProfileScreen({super.key,    required this.onBack,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +31,7 @@ class ProfileScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
           color: Colors.black,
-          onPressed: () => Navigator.pop(context),
-        ),
+          onPressed: onBack,        ),
       ),
 
       body: SingleChildScrollView(
@@ -93,7 +95,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ),
                           child: const Icon(
-                            Icons.edit,
+                            Icons.apartment,
                             color: Colors.white,
                             size: 18,
                           ),
@@ -359,11 +361,9 @@ class ProfileScreen extends StatelessWidget {
             icon: Icons.notifications_none_rounded,
             title: "Notifications",
             onTap: () {
-              Navigator.push(
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => const NotificationsScreen(),
-                ),
+                RouteNames.notificationsScreen,
               );
             },
           ),
@@ -372,11 +372,9 @@ class ProfileScreen extends StatelessWidget {
             icon: Icons.history_rounded,
             title: "Attendance History",
             onTap: () {
-              Navigator.push(
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => const AttendanceScreen(),
-                ),
+                RouteNames.attendanceScreen,
               );
             },
           ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_new_project/view/dealers_screen.dart';
 import 'package:my_new_project/view/profile_screen.dart';
 import 'package:my_new_project/view/salesman_dashboard_screen.dart';
 import '../utils/routes/app_colors.dart';
+import '../utils/routes/routes_names.dart';
 import 'attendance_screen.dart';
 import 'notifications_screen.dart';
 
@@ -22,11 +24,23 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
 
-  List<Widget> get salesmanPages => const [
-    SalesmanDashboardScreen(),
+  List<Widget> get salesmanPages => [
+    const SalesmanDashboardScreen(),
+    DealersScreen(
+      onBack: () {
+        setState(() {
+          selectedIndex = 0;
+        });
+      },
+    ),
     Placeholder(),
-    Placeholder(),
-    ProfileScreen(),
+    ProfileScreen(
+      onBack: () {
+        setState(() {
+          selectedIndex = 0;
+        });
+      },
+    ),
   ];
 
   List<Widget> get dealerPages => const [
@@ -44,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: backgroundColor,
 
-      appBar: _appBar(),
+      appBar: selectedIndex == 0 ? _appBar() : null,
 
       body: pages[selectedIndex],
 
@@ -125,11 +139,9 @@ class _HomeScreenState extends State<HomeScreen> {
               InkWell(
                 borderRadius: BorderRadius.circular(14),
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => const NotificationsScreen(),
-                    ),
+                    RouteNames.notificationsScreen,
                   );
                 },
                 child: Container(
@@ -202,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             final labels = [
               "Dashboard",
-              "Customers",
+              "Dealers",
               "Orders",
               "Profile",
             ];

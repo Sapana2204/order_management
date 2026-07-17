@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_new_project/utils/routes/routes_names.dart';
+import 'package:my_new_project/view/attendance_screen.dart';
+import 'package:my_new_project/view/notifications_screen.dart';
+import 'package:my_new_project/view/profile_screen.dart';
 
 import '../../view/homeScreen.dart';
 import '../../view/loginScreen.dart';
@@ -23,7 +26,21 @@ class Routes {
 
       case (RouteNames.splashScreen):
         return MaterialPageRoute(
-            builder: (BuildContext context) => const SplashScreen());
+            builder: (BuildContext context) => const SplashScreen()); 
+        
+        case (RouteNames.notificationsScreen):
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const NotificationsScreen());
+        
+        case (RouteNames.attendanceScreen):
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const AttendanceScreen()); 
+        
+
+        //
+        // case (RouteNames.splashScreen):
+        // return MaterialPageRoute(
+        //     builder: (BuildContext context) => const SplashScreen());
 
 
       default:
