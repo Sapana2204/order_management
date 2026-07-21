@@ -310,6 +310,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                                   ),
 
                                   Padding(
+
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 10,
                                     ),

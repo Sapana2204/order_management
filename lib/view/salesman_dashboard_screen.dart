@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:my_new_project/view/productCatalog_screen.dart';
+import 'package:my_new_project/view/visits_screen.dart';
 import '../utils/routes/app_colors.dart';
 
 class SalesmanDashboardScreen extends StatefulWidget {
@@ -17,6 +19,9 @@ class _SalesmanDashboardScreenState extends State<SalesmanDashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
+
+
+
 
       body: SafeArea(
         child: SingleChildScrollView(
@@ -286,19 +291,38 @@ class _SalesmanDashboardScreenState extends State<SalesmanDashboardScreen> {
       children: [
         actionButton(
           Icons.shopping_cart,
-          "Orders",
+          "Products",
           primary,
+              () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProductCatalogScreen(),
+              ),
+            );
+          },
         ),
+
         actionButton(
           Icons.location_on,
           "Check In",
           Colors.green,
         ),
+
         actionButton(
-          Icons.person_add,
-          "Dealers",
+          Icons.access_time,
+          "Visits",
           Colors.orange,
+              () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const VisitsScreen(),
+              ),
+            );
+          },
         ),
+
         actionButton(
           Icons.payments,
           "Collection",
@@ -311,40 +335,42 @@ class _SalesmanDashboardScreenState extends State<SalesmanDashboardScreen> {
   Widget actionButton(
       IconData icon,
       String title,
-      Color color,
-      ) {
-    return Column(
-      children: [
-        Container(
-          height: 64,
-          width: 64,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(18),
-            boxShadow: [
-              BoxShadow(
-                color: color.withOpacity(.30),
-                blurRadius: 12,
-              ),
-            ],
+      Color color, [
+        VoidCallback? onTap,
+      ]) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            height: 64,
+            width: 64,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(18),
+              boxShadow: [
+                BoxShadow(
+                  color: color.withOpacity(.30),
+                  blurRadius: 12,
+                ),
+              ],
+            ),
+            child: Icon(
+              icon,
+              color: Colors.white,
+              size: 28,
+            ),
           ),
-          child: Icon(
-            icon,
-            color: Colors.white,
-            size: 28,
+          const SizedBox(height: 10),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
-
-        const SizedBox(height: 10),
-
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-          ),
-        )
-      ],
+        ],
+      ),
     );
   }
 
