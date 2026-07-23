@@ -297,7 +297,11 @@ class _SalesmanDashboardScreenState extends State<SalesmanDashboardScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ProductCatalogScreen(),
+                builder: (context) => ProductCatalogScreen(
+                  onBack: () {
+                    Navigator.pop(context);
+                  },
+                ),
               ),
             );
           },

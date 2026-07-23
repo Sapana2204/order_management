@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../utils/routes/app_colors.dart';
 import 'cart_screen.dart';
 
-class ProductCatalogScreen extends StatefulWidget {
-  const ProductCatalogScreen({super.key});
+class ProductCatalogScreen extends StatefulWidget { final VoidCallback onBack;
+  const ProductCatalogScreen({super.key, required this.onBack});
 
   @override
   State<ProductCatalogScreen> createState() =>
@@ -47,26 +47,19 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
       backgroundColor: backgroundColor,
 
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: Colors.white,
-        titleSpacing: 16,
-        automaticallyImplyLeading: false,
+        elevation: 0,
         title: const Text(
-          "Product Catalog",
+          "Product Catalogue",
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.view_column_rounded,
-              color: Colors.grey,
-            ),
-          )
-        ],
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
+          color: Colors.black,
+          onPressed: widget.onBack,        ),
       ),
 
       body: Column(
@@ -374,15 +367,12 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
 
   Widget _cartSummary() {
     return SafeArea(
+      top: false,
       child: Container(
-        margin: const EdgeInsets.all(14),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 12,
-        ),
-        decoration: BoxDecoration(
-          color: const Color(0xff13203D),
-          borderRadius: BorderRadius.circular(18),
+        height: 72,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: const BoxDecoration(
+          color: Color(0xff13203D),
         ),
         child: Row(
           children: [
