@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:my_new_project/view/productCatalog_screen.dart';
 import 'package:my_new_project/view/visits_screen.dart';
 import '../utils/routes/app_colors.dart';
+import 'package:my_new_project/view/collection_screen.dart';
 
 class SalesmanDashboardScreen extends StatefulWidget {
   const SalesmanDashboardScreen({super.key});
@@ -331,6 +332,14 @@ class _SalesmanDashboardScreenState extends State<SalesmanDashboardScreen> {
           Icons.payments,
           "Collection",
           Colors.purple,
+              () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CollectionScreen(),
+              ),
+            );
+          },
         ),
       ],
     );
